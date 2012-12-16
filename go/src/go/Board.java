@@ -127,25 +127,13 @@ public class Board extends JPanel{
 		this.drawLines(arg);
 	
 		
-		for(int i = 0; i < this.x; i++)
-		{
-			for(int j = 0; j < this.y; j++)
-			{
-				if(this.source[i][j] != piece.free)
-					this.drawpiece(i, j, this.source[i][j], arg);
-					
-			}
-		}
+		
 		arg.setColor(Board.FOOTER);
 		arg.fillRect(0, (Board.SIZE * this.y) + this.BOARDER  + 12, (Board.SIZE * this.x)+ Board.BOARDER * 2 , Board.FOOTER_HEIGHT);
 		
-		if(this.turn == piece.white)
-			arg.setColor(Color.WHITE);
-		else
-			arg.setColor(Color.BLACK);
+		this.drawPieces(arg);
 		
-		arg.fillOval(5, (Board.BOARDER + (Board.SIZE * this.y) + Board.SIZE / 2) - 3 , Board.SIZE, Board.SIZE);
-		
+	
 		String white = "White: ";
 		white += this.white_score;
 		
@@ -159,6 +147,28 @@ public class Board extends JPanel{
 		
 		
 		}
+	
+	
+	public void drawPieces(Graphics2D arg)
+	{
+		for(int i = 0; i < this.x; i++)
+		{
+			for(int j = 0; j < this.y; j++)
+			{
+				if(this.source[i][j] != piece.free)
+					this.drawpiece(i, j, this.source[i][j], arg);
+					
+			}
+		}
+		
+		if(this.turn == piece.white)
+			arg.setColor(Color.WHITE);
+		else
+			arg.setColor(Color.BLACK);
+		
+		arg.fillOval(5, (Board.BOARDER + (Board.SIZE * this.y) + Board.SIZE / 2) - 3 , Board.SIZE, Board.SIZE);
+		
+	}
 	
 	private void drawLines(Graphics2D arg)
 	{
@@ -189,19 +199,27 @@ public class Board extends JPanel{
 	
 	public void drawpiece(int x, int y, piece p, Graphics g)
 	{		
-		Color c;
-		if (p == piece.white)
-			c = Color.WHITE;
-		else if (p == piece.black)
-			c = Color.BLACK;
-		else
-			c = new Color(0,0,0,0);
+		Color c = Color.WHITE;
 		
-		g.setColor(c);
-		g.fillOval(Board.BOARDER + (Board.SIZE * x) - Board.SIZE / 2,
-				Board.BOARDER + (Board.SIZE * y) - Board.SIZE / 2
+		if(p == piece.white || p == piece.black){
+			g.setColor(Color.BLACK);
+			g.fillOval(Board.BOARDER + (Board.SIZE * x) - Board.SIZE / 2,
+					Board.BOARDER + (Board.SIZE * y) - Board.SIZE / 2
 				
 				, Board.SIZE , Board.SIZE );
+		
+			if(p == piece.white)
+			{
+				g.setColor(c);
+				
+				g.fillOval((Board.BOARDER + (Board.SIZE * x) - Board.SIZE / 2) + 2,
+						(Board.BOARDER + (Board.SIZE * y) - Board.SIZE / 2) + 2
+					
+					, Board.SIZE - 4 , Board.SIZE - 4);
+			
+			}
+		}
+		
 	} 
 	
 	public void get_coordinates(int x, int y)
@@ -237,7 +255,7 @@ public class Board extends JPanel{
 		Board temp = new Board(this);
 		
 		Boolean success = temp.play(x, y);
-		int i = temp.clear_dead_chains(temp.turn);
+		int i  = temp.clear_dead_chains(temp.turn);
 		
 		boolean b = false;
 		if(i == 0)

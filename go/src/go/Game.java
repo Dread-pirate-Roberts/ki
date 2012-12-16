@@ -32,7 +32,7 @@ public class Game extends JPanel{
 	public Game()
 	{
 		this.game = new Board();
-		this.game.intermediate();
+		this.game.advanced();
 		this.game.turn = piece.black;
 		this.mouse = new Mouse();
 		this.frame = new JFrame("Go");
