@@ -13,6 +13,7 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 
 
@@ -28,32 +29,52 @@ public class Game extends JPanel{
 	JFrame frame;
 	JLabel statusbar;
 	
+	JMenuBar gamemenu;
+	
 	
 	public Game()
 	{
+		this.setGame(3,0);
+	}
+	
+	public Game(int size, int handicap)
+	{
+		this.setGame(size,handicap);
+	}
+	
+	protected void setGame(int size, int handicap)
+	{
 		this.game = new Board();
-		this.game.advanced();
+		this.game.setSize(size);
 		this.game.turn = piece.black;
+		this.game.handicap(handicap);
 		this.mouse = new Mouse();
 		this.frame = new JFrame("Go");
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.frame.setSize( (Board.BOARDER * 2) + (Board.SIZE * ( game.x))
-				,10 + (Board.BOARDER * 2) + (Board.SIZE * ( game.y))
-				+ Board.FOOTER_HEIGHT);
+		this.setSize();
 		this.frame.add(this.game);
 		this.frame.setVisible(true);
 		this.frame.setResizable(false);
-		
 		this.frame.addMouseListener(mouse);
+	}
+	
+	protected void setSize()
+	{
+		this.frame.setSize((Board.BOARDER * 2) + (Board.SIZE * ( game.x))
+				,10 + (Board.BOARDER * 2) + (Board.SIZE * ( game.y))
+				+ Board.FOOTER_HEIGHT);
 	}
 	
 	public static void main(String[] args) {
 
-		Game m = new Game();
+		Game m = new Game(3,0);
 
 
 	}
 	
+	public class GoMenu extends JMenuBar{
+		
+	}
 	
 	public class Mouse implements MouseListener{
 		
@@ -84,8 +105,7 @@ public class Game extends JPanel{
 			
 		}
 
-		
-
+	
 	}
 
 }

@@ -80,6 +80,24 @@ public class Board extends JPanel{
 		
 	}
 	
+	public void setSize(int i)
+	{
+		assert(i >0 && i < 4);
+		
+		switch(i)
+		{
+		case 1:
+			this.beginner();
+			break;
+		case 2:
+			this.intermediate();
+			break;
+		case 3:
+			this.advanced();
+			break;
+		}
+	}
+	
 	public void beginner()
 	{
 		this.set_size(9, 9);	
@@ -195,6 +213,36 @@ public class Board extends JPanel{
 			y += Board.SIZE;
 		}
 		
+		this.drawHandicapMarkings(arg);
+		
+	}
+	
+	private void drawHandicapMarkings(Graphics2D arg)
+	{
+		int start, change;
+		
+		if(this.x == 9){
+			start = 2;change = 2;
+		}
+		else
+		{
+			start = 3;
+			if(this.x == 13)
+				change = 3;
+			else
+				change = 6;
+		}
+		
+		for(int x = start; x < start + change *3; x += change)
+		{
+			for(int y = start; y < start + change * 3; y += change)
+			{
+				arg.fillOval((Board.BOARDER + (Board.SIZE * x)) - 4,
+						(Board.BOARDER + (Board.SIZE * y) ) - 4 
+					
+					, 9 , 9);
+			}
+		}
 	}
 	
 	public void drawpiece(int x, int y, piece p, Graphics g)
@@ -312,25 +360,27 @@ public class Board extends JPanel{
 	private boolean play(int x, int y)
 	{
 		
-		Boolean ret = true;
-		
-		if(x >= this.x || y >= this.y)
-			ret = false;
-		
-		if(x < 0 || y < 0)
-			ret = false;
+		Boolean ret = this.inRange(x, y);
 		
 		if(ret)
 		{
 			if(this.get_piece(x,y) == piece.free)
 			{
-				this.source[x][y] = this.turn;
+				this.setPiece(x, y, this.turn);
 			}
 			else
 				ret = false;
 		}
 		
 		return ret;
+	}
+	
+	public boolean inRange(int x, int y)
+	{
+		boolean ret = (x >= 0);
+		ret &= x < this.x;
+		ret &= y >= 0;
+		return ret & y < this.y;
 	}
 	
 	public piece get_piece(int x, int y)
@@ -525,5 +575,62 @@ public class Board extends JPanel{
 		this.error = arg.error;
 	}
 	
+	
+	protected void handicap(int i)
+	{
+		assert(i >= 0);
+		assert(i < 10);
+		
+		this.black_score += i;
+		int diff;int half = (this.x / 2) ;
+		
+		if(this.x == 9)
+			diff = 2;
+		else 
+			diff = 3;
+		
+		if(i > 0)
+			this.turn = piece.white;
+		
+		
+		
+		if(i > 0)
+			this.setBlack(this.x - diff - 1,diff);i--;
+		if(i > 0)
+			this.setBlack(diff, this.y - 1 - diff);i--;
+		if(i > 0)
+			this.setBlack(diff, diff);i--;
+		if(i > 0)
+			this.setBlack(this.x - diff - 1, this.y - diff - 1);i--;
+		if(i > 0)
+			this.setBlack(half,half);i--;
+		if(i > 0)
+			this.setBlack(half, diff);i--;
+		if(i > 0)
+			this.setBlack(diff, half);i--;
+		if(i > 0)
+			this.setBlack(half,this.y - diff - 1);i--;
+		if(i > 0)
+			this.setBlack(this.x - diff - 1, half);i--;
+			
+		
+	}
+	
+	private void setWhite(int x, int y)
+	{
+		this.setPiece(x,y, piece.white);
+	}
+	
+	private void setBlack(int x, int y)
+	{
+		this.setPiece(x, y, piece.black);
+	}
+	
+	private void setPiece(int x, int y, piece p)
+	{
+		assert(this.inRange(x, y));
+		
+		this.source[x][y] = p;
+	}
 	
 }
