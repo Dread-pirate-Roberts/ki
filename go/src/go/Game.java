@@ -8,12 +8,15 @@ import go.Board.piece;
 
 import java.awt.BorderLayout;
 import java.awt.Graphics;
+import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
 import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
 
@@ -28,8 +31,8 @@ public class Game extends JPanel{
 	Mouse mouse;
 	JFrame frame;
 	JLabel statusbar;
+	GoMenu menu;
 	
-	JMenuBar gamemenu;
 	
 	
 	public Game()
@@ -50,7 +53,10 @@ public class Game extends JPanel{
 		this.game.handicap(handicap);
 		this.mouse = new Mouse();
 		this.frame = new JFrame("Go");
+		this.frame.setIconImage(Toolkit.getDefaultToolkit().getImage("icon.png"));
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.menu = new GoMenu();
+		this.frame.setJMenuBar(this.menu);
 		this.setSize();
 		this.frame.add(this.game);
 		this.frame.setVisible(true);
@@ -67,12 +73,35 @@ public class Game extends JPanel{
 	
 	public static void main(String[] args) {
 
-		Game m = new Game(3,0);
+		Game m = new Game();
 
 
 	}
 	
 	public class GoMenu extends JMenuBar{
+		
+		public GoMenu()
+		{
+			  JMenu first =  new JMenu("File");
+			  JMenuItem newGame = new JMenuItem("New Game");
+			  first.add(newGame);
+			  first.addSeparator();
+			  JMenuItem save = new JMenuItem("Save Game");
+			  JMenuItem load = new JMenuItem("Load Game");
+			  first.add(save);first.add(load);
+			  this.add(first);
+			  
+			  JMenu second = new JMenu("Game");
+			  JMenuItem score = new JMenuItem("Score");
+			  second.add(score);
+			  second.addSeparator();
+			  JMenuItem rules = new JMenuItem("How to Play");
+			  JMenuItem about = new JMenuItem("About the Program");
+			  second.add(rules);
+			  second.add(about);
+			  this.add(second);
+			
+		}
 		
 	}
 	

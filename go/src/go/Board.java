@@ -39,7 +39,7 @@ public class Board extends JPanel{
 	
 	//graphics info------------
 	
-	protected static int BOARDER = 30;
+	protected static int BOARDER = 50;
 	protected static int SIZE = 40;
 	protected static int FOOTER_HEIGHT = 50;
 	protected static Color BACKGROUND = new Color(212,170,104,255);
@@ -281,7 +281,7 @@ public class Board extends JPanel{
 		else
 			ret_x = x+1;
 		
-		y -= Board.BOARDER;
+		y -= Board.BOARDER;y -= 20;
 		int y_dec = y % Board.SIZE;y = y / Board.SIZE; 
 		
 		if(y_dec < Board.SIZE / 2)
