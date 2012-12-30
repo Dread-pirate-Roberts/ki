@@ -45,6 +45,7 @@ public class Game extends JPanel{
 		this.setGame(size,handicap);
 	}
 	
+	
 	protected void setGame(int size, int handicap)
 	{
 		this.game = new Board();
@@ -78,32 +79,7 @@ public class Game extends JPanel{
 
 	}
 	
-	public class GoMenu extends JMenuBar{
-		
-		public GoMenu()
-		{
-			  JMenu first =  new JMenu("File");
-			  JMenuItem newGame = new JMenuItem("New Game");
-			  first.add(newGame);
-			  first.addSeparator();
-			  JMenuItem save = new JMenuItem("Save Game");
-			  JMenuItem load = new JMenuItem("Load Game");
-			  first.add(save);first.add(load);
-			  this.add(first);
-			  
-			  JMenu second = new JMenu("Game");
-			  JMenuItem score = new JMenuItem("Score");
-			  second.add(score);
-			  second.addSeparator();
-			  JMenuItem rules = new JMenuItem("How to Play");
-			  JMenuItem about = new JMenuItem("About the Program");
-			  second.add(rules);
-			  second.add(about);
-			  this.add(second);
-			
-		}
-		
-	}
+
 	
 	public class Mouse implements MouseListener{
 		
