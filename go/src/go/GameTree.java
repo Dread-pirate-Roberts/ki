@@ -3,15 +3,12 @@ package go; /**
  *@date:Feb 21, 2013
  */
 
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
 
 import go.Intersection.piece;
 
-/**
- */
 public class GameTree {
 	
 	Board board;
@@ -20,62 +17,50 @@ public class GameTree {
 	Location loc, next;
 	piece team;
 	
-	GameTree(Board b, piece p)
-	{
+	GameTree(Board b, piece p) {
 		this.board = new Board(b);
 		this.team = p;
-		this.children = new ArrayList<GameTree>();
+		this.children = new ArrayList<>();
 		this.loc = new Location();
 		this.next = new Location();
 	}
 	
-	protected void set_score()
-	{
+	protected void set_score() {
 		this.score = -999999;
 		
-		for(GameTree g: this.children)
-		{
+		for(GameTree g: this.children) {
 			g.set_score();
 			
 			double a = this.board.get_area_score();
 			double t = this.board.get_territory_score();
 			
-			if(this.team == piece.black)
-			{
+			if(this.team == piece.black) {
 				a = 0.0 - a;
 				t = 0.0 - t;
 			}
 			
 			double s = lesser(a,t);
 			
-			if(s > this.score)
-			{
+			if(s > this.score) {
 				this.score = s;
 				this.next = new Location(g.loc);
 			}
-			
 		}
 	}
 	
-	public Location get_next_move()
-	{
+	public Location get_next_move() {
 		Location ret = null;
 		double high_score = -99999999;
-		for(GameTree g: this.children)
-		{
-			 if(g.average_score() > high_score)
-			 {
+		for(GameTree g: this.children) {
+			 if(g.average_score() > high_score) {
 				 high_score = g.average_score();
 				 ret = new Location(g.loc);
 			 }
-			 
 		}
-		
 		return ret;
 	}
 	
-	public double average_score()
-	{
+	public double average_score() {
 		double sum = 0;
 		for(GameTree g : this.children)
 			sum += g.score;
@@ -83,34 +68,27 @@ public class GameTree {
 		return sum / this.children.size();
 	}
 	
-	public static double lesser(double a, double b)
-	{
+	public static double lesser(double a, double b) {
 		if(a < b)
 			return a;
 		else
 			return b;
 	}
 	
-	public static double greater(double a, double b)
-	{
+	public static double greater(double a, double b) {
 		if(a > b)
 			return a;
 		else 
 			return b;
 	}
 	
-	protected void build_tree(int depth)
-	{
-		if(depth != 0)
-		{
-			for(int i = 0;i < 3; i++ )
-			{
+	protected void build_tree(int depth) {
+		if(depth != 0) {
+			for(int i = 0;i < 3; i++ ) {
 				this.children.add(new GameTree(this.board, this.team));
 			}
 			
-			for(GameTree g: this.children)
-			{
-
+			for(GameTree g: this.children) {
 				int x,y;
 				Date d = new Date();
 				Random rand = new Random(d.getTime());
@@ -129,5 +107,4 @@ public class GameTree {
 			}
 		}
 	}
-
 }

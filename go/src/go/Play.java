@@ -3,12 +3,8 @@ package go; /**
  *@date:Jan 24, 2013
  */
 
-
 import java.util.ArrayList;
 
-
-/**
- */
 public class Play {
 	
 	protected Location loc;
@@ -16,39 +12,31 @@ public class Play {
 	protected ArrayList<Chain> chains;
 	
 	public Play(){
-		this.chains = new ArrayList<Chain>();
+		this.chains = new ArrayList<>();
 		this.loc = new Location();
 	}
 	
-	public Play(Play p)
-	{
+	public Play(Play p) {
 		this.loc = new Location(p.loc);
 		this.inter = p.inter;
-		this.chains = new ArrayList<Chain>(p.chains);
-		
+		this.chains = new ArrayList<>(p.chains);
 	}
 	
-	public Play(int x, int y, Intersection i, ArrayList<Chain> c)
-	{
+	public Play(int x, int y, Intersection i, ArrayList<Chain> c) {
 		this.loc = new Location(x,y);
 		this.inter = new Intersection(i);
 		this.chains = c;
 	}
 	
-	public void setLocation(Location l)
-	{
+	public void setLocation(Location l) {
 		this.loc = new Location(l.x,l.y);
 	}
 	
-	public void setLocation(int x, int y)
-	{
+	public void setLocation(int x, int y) {
 		this.loc = new Location(x,y);
 	}
-	
-	
-	public void addChain(Chain c)
-	{
+
+	public void addChain(Chain c) {
 		this.chains.add(c);
 	}
-
 }
