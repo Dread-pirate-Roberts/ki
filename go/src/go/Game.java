@@ -1,4 +1,4 @@
-/**
+package go; /**
  *@author: David Buebe
  *@date:Oct 17, 2012
  */
@@ -8,13 +8,9 @@ import go.Intersection.piece;
 
 
 import java.awt.Color;
-import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Graphics;
 import java.awt.Toolkit;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -35,19 +31,8 @@ import javax.swing.JSlider;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InvalidClassException;
-import java.io.ObjectOutputStream;
-import java.awt.FlowLayout;
-import java.awt.Canvas;
 import javax.swing.JTextField;
-import java.awt.Panel;
-import javax.swing.UIManager;
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeEvent;
 import javax.swing.SwingConstants;
 
 
@@ -64,15 +49,15 @@ public class Game extends JPanel{
 	
 	private final JMenuBar menuBar = new JMenuBar();
 	private final JMenu mnFile = new JMenu("File");
-	private final JMenuItem mntmNewGame = new JMenuItem("New Game");
+	private final JMenuItem mntmNewGame = new JMenuItem("New go.Game");
 	private final JSeparator separator = new JSeparator();
-	private final JMenuItem mntmSaveGame = new JMenuItem("Save Game");
-	private final JMenuItem mntmLoadGame = new JMenuItem("Load Game");
-	private final JMenu mnGame = new JMenu("Game");
+	private final JMenuItem mntmSaveGame = new JMenuItem("Save go.Game");
+	private final JMenuItem mntmLoadGame = new JMenuItem("Load go.Game");
+	private final JMenu mnGame = new JMenu("go.Game");
 	private final JMenu mnHelp = new JMenu("Help");
 	private final JMenuItem mntmUndoMove = new JMenuItem("Undo Move");
-	private final JMenuItem mntmScoreGame = new JMenuItem("Score Game");
-	private final JMenuItem mntmHowToPlay = new JMenuItem("How to Play");
+	private final JMenuItem mntmScoreGame = new JMenuItem("go.Score go.Game");
+	private final JMenuItem mntmHowToPlay = new JMenuItem("How to go.Play");
 	private final JMenuItem mntmAboutKi = new JMenuItem("About Ki");
 	//private JFrame newGameMenu = new newGame();
 	private newGameMenu newGamePopup = new newGameMenu();
@@ -220,7 +205,7 @@ public class Game extends JPanel{
 		
 			public void actionPerformed(ActionEvent event) {
 				saveGameMenu = new JFileChooser();
-				saveGameMenu.setDialogTitle("Save Game");
+				saveGameMenu.setDialogTitle("Save go.Game");
 				saveGameMenu.setApproveButtonText("Save");
 				if(
 						true//event.getSource() == this
@@ -250,7 +235,7 @@ public class Game extends JPanel{
 			public void actionPerformed(ActionEvent arg0) {
 				
 				loadGameMenu = new JFileChooser();
-				loadGameMenu.setDialogTitle("Load Game");
+				loadGameMenu.setDialogTitle("Load go.Game");
 				loadGameMenu.setApproveButtonText("Load");
 				if(true)
 				{
@@ -367,7 +352,7 @@ public class Game extends JPanel{
 		private final JLabel lblOpponent = new JLabel("Opponent");
 		private final JRadioButton rdbtnHuman = new JRadioButton("Human");
 		private final JRadioButton rdbtnComputerwhite = new JRadioButton("Computer (White)");
-		private final JLabel lblDifficulty = new JLabel("Board Size");
+		private final JLabel lblDifficulty = new JLabel("go.Board Size");
 		private final JRadioButton rdbtnBeginner = new JRadioButton("Beginner (9 x 9)");
 		private final JRadioButton rdbtnIntermediate = new JRadioButton("Intermediate (13 x 13)");
 		private final JRadioButton rdbtnAdvanced = new JRadioButton("Advanced (19 x 19)");
@@ -376,7 +361,7 @@ public class Game extends JPanel{
 		private final ButtonGroup grpOpponent = new ButtonGroup();
 		private final ButtonGroup grpDifficulty = new ButtonGroup();
 		private JSlider slider;
-		private final JButton btnNewButton = new JButton("New Game");
+		private final JButton btnNewButton = new JButton("New go.Game");
 		private final JButton btnCancel = new JButton("Cancel");
 		
 		protected GameInfo newGameInfo;
@@ -498,7 +483,7 @@ public class Game extends JPanel{
 				
 				
 				
-				setTitle("New Game");
+				setTitle("New go.Game");
 				setVisible(false);
 				setSize(new Dimension(279, 401));
 				

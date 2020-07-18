@@ -1,4 +1,4 @@
-/**
+package go; /**
  *@author: David Buebe
  *@date:Oct 23, 2012
  */

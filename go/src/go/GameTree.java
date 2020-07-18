@@ -1,10 +1,9 @@
-/**
+package go; /**
  *@author: David Buebe
  *@date:Feb 21, 2013
  */
 
 
-import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;

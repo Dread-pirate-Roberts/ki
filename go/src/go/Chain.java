@@ -1,11 +1,9 @@
-/**
+package go; /**
  *@author: David Buebe
  *@date:Oct 18, 2012
  */
 
 
-
-import go.Intersection.piece;
 
 import java.io.Serializable;
 import java.util.ArrayList;

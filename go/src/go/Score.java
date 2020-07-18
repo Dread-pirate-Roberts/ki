@@ -1,10 +1,8 @@
-/**
+package go; /**
  *@author: David Buebe
  *@date:Feb 6, 2013
  */
 
-
-import java.util.ArrayList;
 
 import go.Intersection.piece;
 /**

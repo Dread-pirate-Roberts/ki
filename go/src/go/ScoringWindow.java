@@ -1,4 +1,4 @@
-/**
+package go; /**
  *@author: David Buebe
  *@date:Feb 6, 2013
  */
@@ -8,9 +8,6 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 
 import java.awt.Font;
-import java.awt.GridLayout;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.JTextField;
 
 /**

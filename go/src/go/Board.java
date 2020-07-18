@@ -1,4 +1,4 @@
-/**
+package go; /**
  *@author: David Buebe	
  *@date:Oct 17, 2012
  */
@@ -18,14 +18,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Queue;
 import java.util.Random;
-import java.util.Stack;
 
-import javax.swing.JComponent;
 import javax.swing.JPanel;
 
 import go.Intersection.piece;
@@ -253,8 +249,8 @@ public class Board extends JPanel implements java.io.Serializable{
 		
 		arg.setColor(Color.BLACK);
 		
-		arg.drawString(white, 75,(Board.BOARDER + (Board.SIZE * this.size) + Board.SIZE )  );
-		arg.drawString(black, 200, (Board.BOARDER + (Board.SIZE * this.size) + Board.SIZE ));
+		arg.drawString(white, 75,(go.Board.BOARDER + (go.Board.SIZE * this.size) + go.Board.SIZE )  );
+		arg.drawString(black, 200, (go.Board.BOARDER + (go.Board.SIZE * this.size) + go.Board.SIZE ));
 		
 		white = new String("White Prisoners: ");
 		white += this.white_prisoners;
@@ -262,15 +258,15 @@ public class Board extends JPanel implements java.io.Serializable{
 		black += this.black_prisoners;
 		
 		
-		arg.drawString(white, 75,(Board.BOARDER + (Board.SIZE * this.size) + Board.SIZE )  + 15);
-		arg.drawString(black, 200, (Board.BOARDER + (Board.SIZE * this.size) + Board.SIZE ) + 15);
+		arg.drawString(white, 75,(go.Board.BOARDER + (go.Board.SIZE * this.size) + go.Board.SIZE )  + 15);
+		arg.drawString(black, 200, (go.Board.BOARDER + (go.Board.SIZE * this.size) + go.Board.SIZE ) + 15);
 		
 		if(this.turn == piece.white)
 			arg.setColor(Color.WHITE);
 		else
 			arg.setColor(Color.BLACK);
 		
-		arg.fillOval(5, (Board.BOARDER + (Board.SIZE * this.size) + Board.SIZE / 2) - 3 , Board.SIZE, Board.SIZE);*/
+		arg.fillOval(5, (go.Board.BOARDER + (go.Board.SIZE * this.size) + go.Board.SIZE / 2) - 3 , go.Board.SIZE, go.Board.SIZE);*/
 		
 		String turn;
 		
@@ -488,7 +484,7 @@ public class Board extends JPanel implements java.io.Serializable{
 	}
 	
 	/*
-	protected boolean repeat(Board b)
+	protected boolean repeat(go.Board b)
 	{
 		boolean ret = false;
 		if(!b.history.isEmpty())
@@ -845,7 +841,7 @@ public class Board extends JPanel implements java.io.Serializable{
 		else
 			color = piece.black;
 		
-		Chain c;
+		go.Chain c;
 		for(int i = 0; i < p.chains.size(); i++)
 		{
 			c = p.chains.get(i);
