@@ -3,7 +3,6 @@
  *@date:Feb 6, 2013
  */
 
-
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 
@@ -13,8 +12,6 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JTextField;
 
-/**
- */
 public class ScoringWindow extends JDialog{
 	private final JLabel lblTerritory = new JLabel("Territory");
 	private final JLabel lblArea = new JLabel("Area");
@@ -25,11 +22,11 @@ public class ScoringWindow extends JDialog{
 		initGUI();
 	}
 	
-	public ScoringWindow(Board b)
-	{
+	public ScoringWindow(Board b) {
 		initGUI();
 		setScores(b);
 	}
+	
 	private void initGUI() {
 		setAlwaysOnTop(true);
 		
@@ -59,40 +56,32 @@ public class ScoringWindow extends JDialog{
 		setResizable(false);
 	}
 	
-	public void setScores(Board b)
-	{
-		
-		
-		double t_score = b.get_territory_score();
-		
+	public void setScores(Board b) { 
+		double t_score = b.get_territory_score(); 
 		double a_score = b.get_area_score();
 		
 		String territory, area;
 		
-		if(t_score == 0)
+		if(t_score == 0){
 			territory = "Tie";
-		else if(t_score > 0)
+		} else if(t_score > 0){
 			territory = "White wins by:" + t_score;
-		else
+		} else{
 			territory = "Black wins by:" + (0.0 - t_score);
+		}
 		
-		if(t_score == 0)
+		if(t_score == 0){
 			area = "Tie";
-		else if(t_score > 0)
+		} else if(t_score > 0){
 			area = "White wins by:" + a_score;
-		else
+		} else {
 			area = "Black wins by:" + (0.0 - a_score);
-		
+		}
 		
 		territoryScore.setText(territory);
 		areaScore.setText(area);
 		
-		
 		getContentPane().add(territoryScore);
 		getContentPane().add(areaScore);
-		
-			
 	}
-
-	
 }
