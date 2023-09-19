@@ -90,23 +90,19 @@ public class Game extends JPanel{
 	private JTextField txtWhiteStoneCount = new JTextField();
 	private JTextField txtWhitePrisonerCount = new JTextField();
 
-	public Game()
-	{
+	public Game() {
 		this.setGame(9,0,Computer.none);
 	}
 	
-	public Game(int size, int handicap,Computer comp)
-	{
+	public Game(int size, int handicap,Computer comp) {
 		this.setGame(size,handicap, comp);
 	}
 	
-	
-	protected void setGame(go.Game.newGameMenu.GameInfo newGameInfo)
-	{
+	protected void setGame(go.Game.newGameMenu.GameInfo newGameInfo) {
 		this.setGame(newGameInfo.getSize(), newGameInfo.getHandicap(), newGameInfo.computer());
 	}
-	protected void setGame(int size, int handicap, Computer computer)
-	{
+	
+	protected void setGame(int size, int handicap, Computer computer) {
 		//this.popup_in_use = false;
 		this.game = new Board();// this.listener = new Listener();
 		this.game.setSize(size);
@@ -117,18 +113,16 @@ public class Game extends JPanel{
 		
 		this.render();
 		
-		if(computer == Computer.black && handicap == 0)
+		if(computer == Computer.black && handicap == 0) {
 			this.game.computer_play();
-		else if(computer == Computer.white && handicap != 0)
+		} else if(computer == Computer.white && handicap != 0){
 			this.game.computer_play();
-		
+		}
 		
 		this.update_stone_info();
-		
 	}
 	
-	protected void initGameInfo()
-	{
+	protected void initGameInfo() {
 		lblBlackStones.setBounds(120, ((this.game.size - 1) * Board.SIZE) + ( 2 *Board.BOARDER) + 24, 40, 14);
 		game.add(lblBlackStones);
 		
@@ -141,9 +135,6 @@ public class Game extends JPanel{
 		lblWhitePrisoners.setBounds(308, (this.game.size - 1) * Board.SIZE + 2 * Board.BOARDER + 54, 58, 14);
 		game.add(lblWhitePrisoners);
 		txtBlackStoneCount.setHorizontalAlignment(SwingConstants.CENTER);
-		
-		
-		
 		
 		txtBlackStoneCount.setEditable(false);
 		txtBlackStoneCount.setBounds(180, ((this.game.size - 1) * Board.SIZE) + ( 2 *Board.BOARDER) + 24, 30, 20);
@@ -167,10 +158,7 @@ public class Game extends JPanel{
 		this.update_stone_info();
 	}
 	
-	
-	
-	protected void render()
-	{
+	protected void render() {
 		txtWhitePrisonerCount.setColumns(10);
 		txtWhiteStoneCount.setColumns(10);
 		txtBlackPrisonerCount.setColumns(10);
@@ -194,24 +182,19 @@ public class Game extends JPanel{
 	//	this.frame.addItemListener(listener);
 		
 	}
-	protected void setMenus()
-	{
+	
+	protected void setMenus() {
 		frame.setJMenuBar(menuBar);
 		
 		menuBar.add(mnFile);
-		mntmNewGame.addActionListener(new ActionListener() 
-		{
+		mntmNewGame.addActionListener(new ActionListener()  {
 			
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent arg0) {
-				
-				
 				newGamePopup.show();
 
 			}
-			
 		});
-		
 		
 		mnFile.add(mntmNewGame);
 		
@@ -223,14 +206,10 @@ public class Game extends JPanel{
 				saveGameMenu = new JFileChooser();
 				saveGameMenu.setDialogTitle("Save Game");
 				saveGameMenu.setApproveButtonText("Save");
-				if(
-						true//event.getSource() == this
-						)
-				{
+				if( true /*event.getSource() == this */) {
 					int val = saveGameMenu.showSaveDialog(Game.this);
 					
-					if(val == JFileChooser.APPROVE_OPTION)
-					{
+					if(val == JFileChooser.APPROVE_OPTION) {
 						File file = saveGameMenu.getSelectedFile();
 						try {
 							game.serialize(file.toString());
@@ -240,8 +219,6 @@ public class Game extends JPanel{
 					}
 					saveGameMenu = null;
 				}
-			 	
-				
 			}
 		});
 
@@ -253,17 +230,13 @@ public class Game extends JPanel{
 				loadGameMenu = new JFileChooser();
 				loadGameMenu.setDialogTitle("Load Game");
 				loadGameMenu.setApproveButtonText("Load");
-				if(true)
-				{
+				if(true) {
 					int val = loadGameMenu.showOpenDialog(Game.this);
 					
-					if(val == JFileChooser.APPROVE_OPTION)
-					{
+					if(val == JFileChooser.APPROVE_OPTION) {
 						File file = loadGameMenu.getSelectedFile();
-						try
-						{
-							game.deserialize(file.toString());
-							
+						try {
+							game.deserialize(file.toString()); 
 						}catch (IOException e){
 							e.printStackTrace();
 						} catch (ClassNotFoundException e) {
@@ -279,9 +252,7 @@ public class Game extends JPanel{
 			}
 		});
 
-		
 		mnFile.add(mntmLoadGame);
-		
 		
 		menuBar.add(mnGame);
 	/*	mntmUndoMove.addActionListener(new ActionListener() {
@@ -316,25 +287,20 @@ public class Game extends JPanel{
 		mnHelp.add(mntmAboutKi);
 	}
 	
-	
-	protected void setSize()
-	{
+	protected void setSize() {
 		this.frame.setSize((Board.BOARDER * 2) + (Board.SIZE * (( game.size)-1)) + 10,
 				10 + (Board.BOARDER * 3) + (Board.SIZE * ( game.size))
 				+ Board.FOOTER_HEIGHT);
 	}
 	
-	public boolean popup_in_use()
-	{
+	public boolean popup_in_use() {
 		return false;
 	}
 	
-	public static void main(String[] args) {
-
+	public static void main(String[] args) { 
 		Game m = new Game();
 	}
 	
-
 	private class Mouse implements MouseListener{
 		
 		public Mouse(){}
@@ -345,26 +311,17 @@ public class Game extends JPanel{
 		
 		public void mousePressed(MouseEvent event) {
 			
-			
 			boolean success = game.get_coordinates(event.getX(), event.getY() - 35);
 			update_stone_info();
-			if(success && game.comp != Computer.none)
-			{
+			if(success && game.comp != Computer.none) {
 				game.computer_play();
 				update_stone_info();
 			}
 			
-		}
-
-		
-
-	
+		} 
 	}
-
-
+ 
 	public class newGameMenu extends JDialog{
-		
-		
 		private final JLabel lblOpponent = new JLabel("Opponent");
 		private final JRadioButton rdbtnHuman = new JRadioButton("Human");
 		private final JRadioButton rdbtnComputerwhite = new JRadioButton("Computer (White)");
@@ -486,43 +443,30 @@ public class Game extends JPanel{
 				getContentPane().add(btnNewButton);
 				btnCancel.addActionListener(new ActionListener() {
 					@SuppressWarnings("deprecation")
-					public void actionPerformed(ActionEvent e) {
-						
+					public void actionPerformed(ActionEvent e) { 		
 						hide();
 					}
 				});
-				
 				
 				btnCancel.setBounds(34, 316, 94, 23);
 				
 				getContentPane().add(btnCancel);
 				
-				
-				
 				setTitle("New Game");
 				setVisible(false);
 				setSize(new Dimension(279, 401));
 				
-				
-				setResizable(false);
-			
-			
-			
-				
+				setResizable(false); 	
 		}
 			
-			public class GameInfo{
-				
-				
-				
+			public class GameInfo{ 
 				private Computer comp;
 				private int size;
 				private int handicap;
 				
 				GameInfo(){}
 				
-				GameInfo(int size, int handicap, Computer comp)
-				{
+				GameInfo(int size, int handicap, Computer comp) {
 					this.comp = comp;
 					
 					assert(size == 9 || size == 13 || size == 19);
@@ -533,33 +477,25 @@ public class Game extends JPanel{
 					this.handicap = handicap;
 				}
 				
-				public int getSize()
-				{
+				public int getSize() {
 					return this.size;
 				}
 				
-				public int getHandicap()
-				{
+				public int getHandicap() {
 					return this.handicap;
 				}
 				
-				public Computer computer()
-				{
+				public Computer computer() {
 					return comp;
-				}
-				
-			}
-			
-		
+				} 
+			} 
 	}
-	
 	
 	public enum Computer{
 		black, white, none
 	}
 	
-	public void update_stone_info()
-	{
+	public void update_stone_info() {
 		this.setTxtBlackStoneCount();
 		this.setTxtWhiteStoneCount();
 		this.setTxtBlackPrisonerCount();
