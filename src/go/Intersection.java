@@ -10,9 +10,6 @@ import java.io.Serializable;
 public class Intersection implements Serializable
 {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -5093527831145393912L;
 
 	public enum piece{

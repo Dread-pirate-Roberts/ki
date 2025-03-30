@@ -5,15 +5,12 @@
 
 package go;
 
-import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
 
 import go.Intersection.piece;
 
-/**
- */
 public class GameTree {
 	
 	Board board;

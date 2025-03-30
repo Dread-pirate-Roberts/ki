@@ -9,13 +9,9 @@ import go.Intersection.piece;
 
 
 import java.awt.Color;
-import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Graphics;
 import java.awt.Toolkit;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -36,19 +32,8 @@ import javax.swing.JSlider;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InvalidClassException;
-import java.io.ObjectOutputStream;
-import java.awt.FlowLayout;
-import java.awt.Canvas;
 import javax.swing.JTextField;
-import java.awt.Panel;
-import javax.swing.UIManager;
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeEvent;
 import javax.swing.SwingConstants;
 
 public class Game extends JPanel{

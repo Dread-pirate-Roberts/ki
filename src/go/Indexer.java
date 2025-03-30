@@ -7,14 +7,8 @@ package go;
 
 import java.io.Serializable;
 
-/**
- */
 public class Indexer implements Serializable{
 	
-	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -4069790158430391750L;
 	
 	protected boolean source[][];

@@ -9,9 +9,6 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 
 import java.awt.Font;
-import java.awt.GridLayout;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.JTextField;
 
 public class ScoringWindow extends JDialog{

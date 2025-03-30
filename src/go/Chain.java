@@ -5,8 +5,6 @@
 
 package go;
 
-import go.Intersection.piece;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 

@@ -7,8 +7,6 @@
 package go;
 
 import java.util.ArrayList;
-import go.Intersection.piece;
-
 
 public class Play {
 	
