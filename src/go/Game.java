@@ -53,32 +53,31 @@ public class Game extends JPanel{
 	private JTextField txtWhitePrisonerCount = new JTextField();
 
 	public Game() {
-		this.setGame(9,0,Computer.none);
+		setGame(9,0,Computer.none);
 	}
 	
 	public Game(int size, int handicap,Computer comp) {
-		this.setGame(size,handicap, comp);
+		setGame(size,handicap, comp);
 	}
 	
 	protected void setGame(go.Game.newGameMenu.GameInfo newGameInfo) {
-		this.setGame(newGameInfo.getSize(), newGameInfo.getHandicap(), newGameInfo.computer());
+		setGame(newGameInfo.getSize(), newGameInfo.getHandicap(), newGameInfo.computer());
 	}
 	
 	protected void setGame(int size, int handicap, Computer computer) {
-		//this.popup_in_use = false;
-		this.game = new Board();// this.listener = new Listener();
-		this.game.setSize(size);
-		this.game.turn = piece.black;
-		this.game.handicap(handicap);
-		this.game.setComputer(computer);
+		game = new Board();
+		game.setSize(size);
+		game.turn = piece.black;
+		game.handicap(handicap);
+		game.setComputer(computer);
 		game.setLayout(null);
 		
-		this.render();
+		render();
 		
 		if(computer == Computer.black && handicap == 0) {
-			this.game.computer_play();
+			game.computer_play();
 		} else if(computer == Computer.white && handicap != 0){
-			this.game.computer_play();
+			game.computer_play();
 		}
 		
 		updateStoneInfo();
@@ -86,36 +85,36 @@ public class Game extends JPanel{
 	
 	protected void initGameInfo() {
 		
-		lblBlackStones.setBounds(120, ((this.game.size - 1) * Board.SIZE) + ( 2 *Board.BOARDER) + 24, 40, 14);
+		lblBlackStones.setBounds(120, ((game.size - 1) * Board.SIZE) + ( 2 *Board.BOARDER) + 24, 40, 14);
 		game.add(lblBlackStones);
 		
-		lblWhiteStones.setBounds(308, ((this.game.size - 1) * Board.SIZE) + ( 2 *Board.BOARDER) + 24, 40, 14);
+		lblWhiteStones.setBounds(308, ((game.size - 1) * Board.SIZE) + ( 2 *Board.BOARDER) + 24, 40, 14);
 		game.add(lblWhiteStones);
 		
-		lblBlackPrisoners.setBounds(120, (this.game.size - 1) * Board.SIZE + (2 * Board.BOARDER + 54), 58, 14);
+		lblBlackPrisoners.setBounds(120, (game.size - 1) * Board.SIZE + (2 * Board.BOARDER + 54), 58, 14);
 		game.add(lblBlackPrisoners);
 		
-		lblWhitePrisoners.setBounds(308, (this.game.size - 1) * Board.SIZE + 2 * Board.BOARDER + 54, 58, 14);
+		lblWhitePrisoners.setBounds(308, (game.size - 1) * Board.SIZE + 2 * Board.BOARDER + 54, 58, 14);
 		game.add(lblWhitePrisoners);
 		txtBlackStoneCount.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		txtBlackStoneCount.setEditable(false);
-		txtBlackStoneCount.setBounds(180, ((this.game.size - 1) * Board.SIZE) + ( 2 *Board.BOARDER) + 24, 30, 20);
+		txtBlackStoneCount.setBounds(180, ((game.size - 1) * Board.SIZE) + ( 2 *Board.BOARDER) + 24, 30, 20);
 		game.add(txtBlackStoneCount);
 		txtBlackPrisonerCount.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		txtBlackPrisonerCount.setEditable(false);
-		txtBlackPrisonerCount.setBounds(180,  ((this.game.size - 1) * Board.SIZE) +  2 * Board.BOARDER + 54, 30, 20);
+		txtBlackPrisonerCount.setBounds(180,  ((game.size - 1) * Board.SIZE) +  2 * Board.BOARDER + 54, 30, 20);
 		game.add(txtBlackPrisonerCount);
 		txtWhiteStoneCount.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		txtWhiteStoneCount.setEditable(false);
-		txtWhiteStoneCount.setBounds(372, ((this.game.size - 1) * Board.SIZE) + ( 2 *Board.BOARDER) + 24, 30, 20);
+		txtWhiteStoneCount.setBounds(372, ((game.size - 1) * Board.SIZE) + ( 2 *Board.BOARDER) + 24, 30, 20);
 		game.add(txtWhiteStoneCount);
 		txtWhitePrisonerCount.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		txtWhitePrisonerCount.setEditable(false);
-		txtWhitePrisonerCount.setBounds(372,  ((this.game.size - 1) * Board.SIZE) + 2 * Board.BOARDER + 54, 30, 20);
+		txtWhitePrisonerCount.setBounds(372,  ((game.size - 1) * Board.SIZE) + 2 * Board.BOARDER + 54, 30, 20);
 		game.add(txtWhitePrisonerCount);
 		
 		try {
@@ -132,23 +131,21 @@ public class Game extends JPanel{
 		txtWhiteStoneCount.setColumns(10);
 		txtBlackPrisonerCount.setColumns(10);
 		txtBlackStoneCount.setColumns(10);
-		this.mouse = new Mouse();
-		this.frame = new JFrame("Ki");
-		this.frame.setIconImage(Toolkit.getDefaultToolkit().getImage("icon.png"));
-		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		mouse = new Mouse();
+		frame = new JFrame("Ki");
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("icon.png"));
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		this.setSize();
-		this.frame.getContentPane().add(this.game);
-		this.frame.setVisible(true);
-		this.frame.setResizable(false);
+		setSize();
+		frame.getContentPane().add(game);
+		frame.setVisible(true);
+		frame.setResizable(false);
 		
+		setMenus();
 		
-		this.setMenus();
+		initGameInfo();
 		
-		this.initGameInfo();
-		
-		this.frame.addMouseListener(mouse);
-	//	this.frame.addItemListener(listener);
+		frame.addMouseListener(mouse);
 		
 	}
 	
@@ -277,12 +274,8 @@ public class Game extends JPanel{
 				+ Board.FOOTER_HEIGHT);
 	}
 	
-	public boolean popup_in_use() {
-		return false;
-	}
-	
 	public static void main(String[] args) { 
-		Game m = new Game();
+		new Game();
 	}
 	
 	private class Mouse implements MouseListener{
@@ -307,173 +300,161 @@ public class Game extends JPanel{
  
 	public class newGameMenu extends JDialog{
 		private static final long serialVersionUID = -1135473400125396418L;
-		private final JLabel lblOpponent = new JLabel("Opponent");
-		private final JRadioButton rdbtnHuman = new JRadioButton("Human");
-		private final JRadioButton rdbtnComputerwhite = new JRadioButton("Computer (White)");
-		private final JLabel lblDifficulty = new JLabel("Board Size");
-		private final JRadioButton rdbtnBeginner = new JRadioButton("Beginner (9 x 9)");
-		private final JRadioButton rdbtnIntermediate = new JRadioButton("Intermediate (13 x 13)");
-		private final JRadioButton rdbtnAdvanced = new JRadioButton("Advanced (19 x 19)");
-		private final JLabel lblHandicap = new JLabel("Handicap");
-		//private final JList list = new JList();
-		private final ButtonGroup grpOpponent = new ButtonGroup();
-		private final ButtonGroup grpDifficulty = new ButtonGroup();
+		private final JLabel opponentLabel = new JLabel("Opponent");
+		private final JRadioButton humanRadioButton = new JRadioButton("Human");
+		private final JRadioButton whiteComputerRadioButton = new JRadioButton("Computer (White)");
+		private final JRadioButton blackComputerRadioButton = new JRadioButton("Computer (Black)");
+		private final JLabel difficultyLabel = new JLabel("Board Size");
+		private final JRadioButton beginnerRadioButton = new JRadioButton("Beginner (9 x 9)");
+		private final JRadioButton intermediateRadioButton = new JRadioButton("Intermediate (13 x 13)");
+		private final JRadioButton advancedRadioButton = new JRadioButton("Advanced (19 x 19)");
+		private final JLabel handicapLabel = new JLabel("Handicap");
+		private final ButtonGroup opponentButtonGroup = new ButtonGroup();
+		private final ButtonGroup difficultyButtonGroup = new ButtonGroup();
 		private JSlider slider;
-		private final JButton btnNewButton = new JButton("New Game");
-		private final JButton btnCancel = new JButton("Cancel");
+		private final JButton newButton = new JButton("New Game");
+		private final JButton cancelButton = new JButton("Cancel");
 		
 		protected GameInfo newGameInfo;
-		protected boolean waiting;
-		private final JRadioButton rdbtnComputerblack = new JRadioButton("Computer (Black)");
-		
+
 		public newGameMenu() {
 			
 			initGUI();
 		}
 			
-			private void initGUI() {
-				//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				getContentPane().setLayout(null);
-				lblOpponent.setFont(new Font("Tahoma", Font.BOLD, 11));
-				lblOpponent.setBackground(Color.WHITE);
-				
-				
-				lblOpponent.setBounds(100, 11, 65, 36);
-				
-				getContentPane().add(lblOpponent);
-				
-				rdbtnHuman.setSelected(true);
-				rdbtnHuman.setBounds(63, 41, 65, 23);
-				getContentPane().add(rdbtnHuman);
-				
-				rdbtnComputerwhite.setBounds(63, 66, 153, 23);
-				getContentPane().add(rdbtnComputerwhite);
-				
-				
-				rdbtnComputerblack.setBounds(63, 92, 153, 23);
-				getContentPane().add(rdbtnComputerblack);
+		private void initGUI() {
+			getContentPane().setLayout(null);
+			opponentLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
+			opponentLabel.setBackground(Color.WHITE);
 			
-				
-				
-				lblDifficulty.setFont(new Font("Tahoma", Font.BOLD, 11));
-				lblDifficulty.setBounds(100, 127, 65, 14);
-				
-				grpOpponent.add(rdbtnHuman);
-				grpOpponent.add(rdbtnComputerwhite);
-				grpOpponent.add(rdbtnComputerblack);
-				
-				
-				getContentPane().add(lblDifficulty);
-				rdbtnBeginner.setSelected(true);
-				rdbtnBeginner.setBounds(63, 148, 142, 23);
-				getContentPane().add(rdbtnBeginner);
-				rdbtnIntermediate.setBounds(63, 174, 168, 23);
-				getContentPane().add(rdbtnIntermediate);
-				rdbtnAdvanced.setBounds(63, 200, 168, 23);
-				getContentPane().add(rdbtnAdvanced);
-				lblHandicap.setFont(new Font("Tahoma", Font.BOLD, 11));
-				lblHandicap.setBounds(100, 230, 55, 23);
-				
-				grpDifficulty.add(rdbtnBeginner);
-				grpDifficulty.add(rdbtnIntermediate);
-				grpDifficulty.add(rdbtnAdvanced);
-				
-				
-				getContentPane().add(lblHandicap);
-			//	list.setBounds(88, 224, 1, 1);
-				//getContentPane().add(list);
-				
-				this.slider = new JSlider(JSlider.HORIZONTAL,0,9,0);
-				slider.setSnapToTicks(true);
-				slider.setBounds(23, 250, 229, 55);
-				slider.setMajorTickSpacing(1);
-				slider.setPaintTicks(true);
-				slider.setPaintLabels(true);
-				getContentPane().add(slider);
-				
-				btnNewButton.addActionListener(new ActionListener() {
-					@SuppressWarnings("deprecation")
-					public void actionPerformed(ActionEvent arg0) {
-						
-						newGameInfo = new GameInfo();
-						
-						if(rdbtnHuman.isSelected())
-							newGameInfo.comp = Computer.none;
-						else if(rdbtnComputerwhite.isSelected())
-							newGameInfo.comp = Computer.white;
-						else
-							newGameInfo.comp = Computer.black;
-						
-						if(rdbtnBeginner.isSelected())
-							newGameInfo.size = 9;
-						else if(rdbtnIntermediate.isSelected())
-							newGameInfo.size = 13;
-						else
-							newGameInfo.size = 19;
-						
-						newGameInfo.handicap = slider.getValue();
-						
-						
-						frame.dispose();
-						setGame(newGameInfo);
-						
-						hide();
-						
-						
+			
+			opponentLabel.setBounds(100, 11, 65, 36);
+			
+			getContentPane().add(opponentLabel);
+			
+			humanRadioButton.setSelected(true);
+			humanRadioButton.setBounds(63, 41, 65, 23);
+			getContentPane().add(humanRadioButton);
+			
+			whiteComputerRadioButton.setBounds(63, 66, 153, 23);
+			getContentPane().add(whiteComputerRadioButton);
+			
+			
+			blackComputerRadioButton.setBounds(63, 92, 153, 23);
+			getContentPane().add(blackComputerRadioButton);
+			
+			difficultyLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
+			difficultyLabel.setBounds(100, 127, 65, 14);
+			
+			opponentButtonGroup.add(humanRadioButton);
+			opponentButtonGroup.add(whiteComputerRadioButton);
+			opponentButtonGroup.add(blackComputerRadioButton);
+			
+			getContentPane().add(difficultyLabel);
+			beginnerRadioButton.setSelected(true);
+			beginnerRadioButton.setBounds(63, 148, 142, 23);
+			getContentPane().add(beginnerRadioButton);
+			intermediateRadioButton.setBounds(63, 174, 168, 23);
+			getContentPane().add(intermediateRadioButton);
+			advancedRadioButton.setBounds(63, 200, 168, 23);
+			getContentPane().add(advancedRadioButton);
+			handicapLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
+			handicapLabel.setBounds(100, 230, 55, 23);
+			
+			difficultyButtonGroup.add(beginnerRadioButton);
+			difficultyButtonGroup.add(intermediateRadioButton);
+			difficultyButtonGroup.add(advancedRadioButton);
+			
+			
+			getContentPane().add(handicapLabel);
+			
+			slider = new JSlider(JSlider.HORIZONTAL,0,9,0);
+			slider.setSnapToTicks(true);
+			slider.setBounds(23, 250, 229, 55);
+			slider.setMajorTickSpacing(1);
+			slider.setPaintTicks(true);
+			slider.setPaintLabels(true);
+			getContentPane().add(slider);
+			
+			newButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					newGameInfo = new GameInfo();
+					
+					if(humanRadioButton.isSelected()) {
+						newGameInfo.comp = Computer.none;
+					} else if (whiteComputerRadioButton.isSelected()) {
+						newGameInfo.comp = Computer.white;
+					} else {
+						newGameInfo.comp = Computer.black;
 					}
-				});
-				btnNewButton.setSelected(true);
-				btnNewButton.setBounds(138, 316, 109, 23);
-				
-				getContentPane().add(btnNewButton);
-				btnCancel.addActionListener(new ActionListener() {
-					@SuppressWarnings("deprecation")
-					public void actionPerformed(ActionEvent e) { 		
-						hide();
+					
+					if(beginnerRadioButton.isSelected()) {
+						newGameInfo.size = 9;
+					} else if (intermediateRadioButton.isSelected()) {
+						newGameInfo.size = 13;
+					} else {
+						newGameInfo.size = 19;
 					}
-				});
+					
+					newGameInfo.handicap = slider.getValue();
+					
+					frame.dispose();
+					setGame(newGameInfo);
+					dispose();
+				}
+			});
 				
-				btnCancel.setBounds(34, 316, 94, 23);
-				
-				getContentPane().add(btnCancel);
-				
-				setTitle("New Game");
-				setSize(new Dimension(279, 401));
-				
-				setResizable(false); 	
-				setVisible(true);
+			newButton.setSelected(true);
+			newButton.setBounds(138, 316, 109, 23);
+			
+			getContentPane().add(newButton);
+			cancelButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					dispose();
+				}
+			});
+			
+			cancelButton.setBounds(34, 316, 94, 23);
+			
+			getContentPane().add(cancelButton);
+			
+			setTitle("New Game");
+			setSize(new Dimension(279, 401));
+			
+			setResizable(false); 	
+			setVisible(true);
 		}
 			
-			public class GameInfo{ 
-				private Computer comp;
-				private int size;
-				private int handicap;
+		public class GameInfo{ 
+			private Computer comp;
+			private int size;
+			private int handicap;
+			
+			GameInfo(){}
+			
+			GameInfo(int size, int handicap, Computer comp) {
+				this.comp = comp;
 				
-				GameInfo(){}
+				assert(size == 9 || size == 13 || size == 19);
+				this.size = size;
 				
-				GameInfo(int size, int handicap, Computer comp) {
-					this.comp = comp;
-					
-					assert(size == 9 || size == 13 || size == 19);
-					this.size = size;
-					
-					assert(handicap >= 0);
-					assert(handicap < 10);
-					this.handicap = handicap;
-				}
-				
-				public int getSize() {
-					return this.size;
-				}
-				
-				public int getHandicap() {
-					return this.handicap;
-				}
-				
-				public Computer computer() {
-					return comp;
-				} 
+				assert(handicap >= 0);
+				assert(handicap < 10);
+				this.handicap = handicap;
+			}
+			
+			public int getSize() {
+				return this.size;
+			}
+			
+			public int getHandicap() {
+				return this.handicap;
+			}
+			
+			public Computer computer() {
+				return comp;
 			} 
+		} 
 	}
 	
 	public enum Computer{
