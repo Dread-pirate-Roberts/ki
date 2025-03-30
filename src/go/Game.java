@@ -35,6 +35,7 @@ import java.io.File;
 import java.io.IOException;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 
 public class Game extends JPanel{
 
@@ -84,6 +85,7 @@ public class Game extends JPanel{
 	}
 	
 	protected void initGameInfo() {
+		
 		lblBlackStones.setBounds(120, ((this.game.size - 1) * Board.SIZE) + ( 2 *Board.BOARDER) + 24, 40, 14);
 		game.add(lblBlackStones);
 		
@@ -115,6 +117,12 @@ public class Game extends JPanel{
 		txtWhitePrisonerCount.setEditable(false);
 		txtWhitePrisonerCount.setBounds(372,  ((this.game.size - 1) * Board.SIZE) + 2 * Board.BOARDER + 54, 30, 20);
 		game.add(txtWhitePrisonerCount);
+		
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		this.update_stone_info();
 	}
