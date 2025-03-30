@@ -6,29 +6,26 @@
 package go;
 
 import javax.swing.JDialog;
+import java.awt.Container;
 import javax.swing.JTextPane;
 
+public final class AboutWindow extends JDialog{
+	private static final long serialVersionUID = -5533117580272065148L;
 
-public class AboutWindow extends JDialog{
-	private final JTextPane textPane = new JTextPane();
 	public AboutWindow() {
-		initGUI();
-	}
-	private void initGUI() {
+		JTextPane textPane = new JTextPane();
 		setAlwaysOnTop(true);
 		setResizable(false);
-		setResizable(false);
 		setTitle("About Ki");
-		getContentPane().setLayout(null);
-		getContentPane().setLayout(null);
-		getContentPane().setLayout(null);
-		getContentPane().setLayout(null);
+		setLocationRelativeTo(null);
+		setSize(367,208);
 		
-		getContentPane().setLayout(null);
+		Container container = getContentPane();
+		container.setLayout(null);
 		
-		this.setSize(367,208);
 		textPane.setBounds(10, 11, 341, 158);
 		
-		getContentPane().add(textPane);
+		container.add(textPane);
+		setVisible(true);
 	}
 }

@@ -9,78 +9,81 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 
 import java.awt.Font;
+import java.awt.Container;
 import javax.swing.JTextField;
 
 public class ScoringWindow extends JDialog{
-	private final JLabel lblTerritory = new JLabel("Territory");
-	private final JLabel lblArea = new JLabel("Area");
-	private final JTextField territoryScore = new JTextField();
-	private final JTextField areaScore = new JTextField();
-	
-	public ScoringWindow() {
-		initGUI();
-	}
+	private static final long serialVersionUID = 2781085662271509297L;
+	private final Container container = getContentPane();
+	private final Board board;
 	
 	public ScoringWindow(Board b) {
-		initGUI();
-		setScores(b);
-	}
-	
-	private void initGUI() {
+		board = b;
 		setAlwaysOnTop(true);
-		
-		areaScore.setEditable(false);
-		areaScore.setBounds(43, 118, 126, 40);
-		areaScore.setColumns(10);
-		territoryScore.setEditable(false);
-		territoryScore.setBounds(43, 36, 126, 34);
-		territoryScore.setColumns(10);
-		getContentPane().setLayout(null);
-		
-		
-		lblTerritory.setBounds(79, 11, 70, 14);
-		
-		getContentPane().add(lblTerritory);
-		
-		lblTerritory.setFont(new Font("Tahoma", Font.BOLD, 11));
-		
-		lblArea.setBounds(91, 93, 56, 14);
-		
-		getContentPane().add(lblArea);
-		
-		lblArea.setFont(new Font("Tahoma", Font.BOLD, 11));
-		
-		
-		this.setSize(224,222);
+		setLocationRelativeTo(null);
+		container.setLayout(null);
+		setSize(224,222);
 		setResizable(false);
+		setVisible(true);
+
+		setLabels();
+		setScores();
 	}
 	
-	public void setScores(Board b) { 
-		double t_score = b.get_territory_score(); 
-		double a_score = b.get_area_score();
+	private void setLabels() {
+		JLabel territoryLabel = new JLabel("Territory");
+		territoryLabel.setBounds(79, 11, 70, 14);
+		territoryLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
+		container.add(territoryLabel);
+
+		JLabel areaLabel = new JLabel("Area");
+		areaLabel.setBounds(91, 93, 56, 14);
+		areaLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
+		container.add(areaLabel);
+	}
+	
+	private void setScores() {
+		addTerritoryScoreTextField();
+		addAreaScoreTextField();
+	}
+	
+	private void addTerritoryScoreTextField() {
+		JTextField territoryScoreTextField = new JTextField();
 		
-		String territory, area;
+		territoryScoreTextField.setEditable(false);
+		territoryScoreTextField.setBounds(43, 36, 126, 34);
+		territoryScoreTextField.setColumns(10);
 		
-		if(t_score == 0){
-			territory = "Tie";
-		} else if(t_score > 0){
-			territory = "White wins by:" + t_score;
+		double territoryScore = board.get_territory_score(); 
+		
+		if(territoryScore == 0){
+			territoryScoreTextField.setText("Tie");
+		} else if(territoryScore > 0){
+			territoryScoreTextField.setText("White wins by:" + territoryScore);
 		} else{
-			territory = "Black wins by:" + (0.0 - t_score);
+			territoryScoreTextField.setText("Black wins by:" + (0.0 - territoryScore));
 		}
 		
-		if(t_score == 0){
-			area = "Tie";
-		} else if(t_score > 0){
-			area = "White wins by:" + a_score;
+		container.add(territoryScoreTextField);
+	}
+	
+	private void addAreaScoreTextField() {
+		JTextField areaScoreTextField = new JTextField();
+		
+		areaScoreTextField.setEditable(false);
+		areaScoreTextField.setBounds(43, 118, 126, 40);
+		areaScoreTextField.setColumns(10);
+		
+		double areaScore = board.get_area_score();
+		
+		if(areaScore == 0){
+			areaScoreTextField.setText("Tie");
+		} else if(areaScore > 0){
+			areaScoreTextField.setText("White wins by:" + areaScore);
 		} else {
-			area = "Black wins by:" + (0.0 - a_score);
+			areaScoreTextField.setText("Black wins by:" + (0.0 - areaScore));
 		}
 		
-		territoryScore.setText(territory);
-		areaScore.setText(area);
-		
-		getContentPane().add(territoryScore);
-		getContentPane().add(areaScore);
+		container.add(areaScoreTextField);
 	}
 }

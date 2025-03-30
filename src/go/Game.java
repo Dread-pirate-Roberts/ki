@@ -42,28 +42,6 @@ public class Game extends JPanel{
 	private Mouse mouse;
 	private JFrame frame;
 	
-	//private GoMenu menu;
-	
-	//Listener listener;
-	
-	private final JMenuBar menuBar = new JMenuBar();
-	private final JMenu mnFile = new JMenu("File");
-	private final JMenuItem mntmNewGame = new JMenuItem("New Game");
-	private final JSeparator separator = new JSeparator();
-	private final JMenuItem mntmSaveGame = new JMenuItem("Save Game");
-	private final JMenuItem mntmLoadGame = new JMenuItem("Load Game");
-	private final JMenu mnGame = new JMenu("Game");
-	private final JMenu mnHelp = new JMenu("Help");
-	private final JMenuItem mntmUndoMove = new JMenuItem("Undo Move");
-	private final JMenuItem mntmScoreGame = new JMenuItem("Score Game");
-	private final JMenuItem mntmHowToPlay = new JMenuItem("How to Play");
-	private final JMenuItem mntmAboutKi = new JMenuItem("About Ki");
-	//private JFrame newGameMenu = new newGame();
-	private newGameMenu newGamePopup = new newGameMenu();
-	private ScoringWindow score = new ScoringWindow();
-	
-	private JFileChooser loadGameMenu = new JFileChooser();
-	private JFileChooser saveGameMenu = new JFileChooser();
 	private final JLabel lblBlackStones = new JLabel("Stones");
 	private final JLabel lblBlackPrisoners = new JLabel("Prisoners");
 	private final JLabel lblWhiteStones = new JLabel("Stones");
@@ -167,107 +145,122 @@ public class Game extends JPanel{
 	}
 	
 	protected void setMenus() {
-		frame.setJMenuBar(menuBar);
+		JMenuBar menuBar = new JMenuBar();
 		
-		menuBar.add(mnFile);
-		mntmNewGame.addActionListener(new ActionListener()  {
-			
-			@SuppressWarnings("deprecation")
-			public void actionPerformed(ActionEvent arg0) {
-				newGamePopup.show();
+		menuBar.add(getFileMenu());
+		menuBar.add(getGameMenu());
+		menuBar.add(getHelpMenu());
+		
+		frame.setJMenuBar(menuBar);
+	}
 
+	private JMenu getFileMenu() {
+		JMenu fileMenu = new JMenu("File");
+		
+		JMenuItem newGameMenuItem = new JMenuItem("New Game");
+
+		newGameMenuItem.addActionListener(new ActionListener()  {
+			public void actionPerformed(ActionEvent arg0) {
+				new newGameMenu();
 			}
 		});
 		
-		mnFile.add(mntmNewGame);
+		fileMenu.add(newGameMenuItem);
 		
-		mnFile.add(separator);
+		fileMenu.add(new JSeparator());
 		
-		mntmSaveGame.addActionListener(new ActionListener() {
+		JMenuItem saveGameMenuItem = new JMenuItem("Save Game");
+		
+		saveGameMenuItem.addActionListener(new ActionListener() {
 		
 			public void actionPerformed(ActionEvent event) {
-				saveGameMenu = new JFileChooser();
-				saveGameMenu.setDialogTitle("Save Game");
-				saveGameMenu.setApproveButtonText("Save");
-				if( true /*event.getSource() == this */) {
-					int val = saveGameMenu.showSaveDialog(Game.this);
-					
-					if(val == JFileChooser.APPROVE_OPTION) {
-						File file = saveGameMenu.getSelectedFile();
-						try {
-							game.serialize(file.toString());
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
+				JFileChooser saveGameMenuItem = new JFileChooser();
+				saveGameMenuItem.setDialogTitle("Save Game");
+				saveGameMenuItem.setApproveButtonText("Save");
+				
+				int val = saveGameMenuItem.showSaveDialog(Game.this);
+				
+				if(val == JFileChooser.APPROVE_OPTION) {
+					File file = saveGameMenuItem.getSelectedFile();
+					try {
+						game.serialize(file.toString());
+					} catch (IOException e) {
+						e.printStackTrace();
 					}
-					saveGameMenu = null;
 				}
+				
 			}
 		});
 
-		mnFile.add(mntmSaveGame);
+		fileMenu.add(saveGameMenuItem);
 		
-		mntmLoadGame.addActionListener(new ActionListener() {
+		JMenuItem loadGameMenuItem = new JMenuItem("Load Game");
+		
+		loadGameMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				JFileChooser loadGameMenuItem = new JFileChooser();
+				loadGameMenuItem.setDialogTitle("Load Game");
+				loadGameMenuItem.setApproveButtonText("Load");
 				
-				loadGameMenu = new JFileChooser();
-				loadGameMenu.setDialogTitle("Load Game");
-				loadGameMenu.setApproveButtonText("Load");
-				if(true) {
-					int val = loadGameMenu.showOpenDialog(Game.this);
-					
-					if(val == JFileChooser.APPROVE_OPTION) {
-						File file = loadGameMenu.getSelectedFile();
-						try {
-							game.deserialize(file.toString()); 
-						}catch (IOException e){
-							e.printStackTrace();
-						} catch (ClassNotFoundException e) {
-							e.printStackTrace();
-						} 
+				int val = loadGameMenuItem.showOpenDialog(Game.this);
+				
+				if(val == JFileChooser.APPROVE_OPTION) {
+					File file = loadGameMenuItem.getSelectedFile();
+					try {
+						game.deserialize(file.toString()); 
+					}catch (Exception e){
+						e.printStackTrace();
 					}
 					setSize();
 					update_stone_info();
-					//render();
 					game.repaint();
 					initGameInfo();
 				}
+
 			}
 		});
 
-		mnFile.add(mntmLoadGame);
+		fileMenu.add(loadGameMenuItem);
 		
-		menuBar.add(mnGame);
-	/*	mntmUndoMove.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(!game.history.isEmpty())
-					game.undo();
-			}
-		});*/
-		
-		mnGame.add(mntmUndoMove);
+		return fileMenu;
+	}
 	
+	private JMenu getGameMenu() {
+		JMenu gameMenu = new JMenu("Game");
 		
-		mnGame.add(mntmScoreGame);
-		score.setVisible(false);
-		mntmScoreGame.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				score.setScores(game);
-				score.setVisible(true);
-			}
-		});
-		menuBar.add(mnHelp);
+		JMenuItem undoMoveMenuItem = new JMenuItem("Undo Move");
+		gameMenu.add(undoMoveMenuItem);
 		
-		mnHelp.add(mntmHowToPlay);
-		mntmAboutKi.addActionListener(new ActionListener() {
+		JMenuItem scoreGameMenuItem = new JMenuItem("Score Game");
+
+		scoreGameMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
-				AboutWindow a = new AboutWindow();
-				a.setVisible(true);
+				new ScoringWindow(game);
 			}
 		});
 		
-		mnHelp.add(mntmAboutKi);
+		gameMenu.add(scoreGameMenuItem);
+		
+		return gameMenu;
+	}
+	
+	private JMenu getHelpMenu() {
+		
+		JMenu helpMenu = new JMenu("Help");
+	
+		helpMenu.add(new JMenuItem("How to Play"));
+
+		JMenuItem aboutItem = new JMenuItem("About Ki");
+		
+		aboutItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				new AboutWindow();
+			}
+		});
+		
+		helpMenu.add(aboutItem);
+		
+		return helpMenu;
 	}
 	
 	protected void setSize() {
@@ -305,6 +298,7 @@ public class Game extends JPanel{
 	}
  
 	public class newGameMenu extends JDialog{
+		private static final long serialVersionUID = -1135473400125396418L;
 		private final JLabel lblOpponent = new JLabel("Opponent");
 		private final JRadioButton rdbtnHuman = new JRadioButton("Human");
 		private final JRadioButton rdbtnComputerwhite = new JRadioButton("Computer (White)");
@@ -436,10 +430,10 @@ public class Game extends JPanel{
 				getContentPane().add(btnCancel);
 				
 				setTitle("New Game");
-				setVisible(false);
 				setSize(new Dimension(279, 401));
 				
 				setResizable(false); 	
+				setVisible(true);
 		}
 			
 			public class GameInfo{ 
