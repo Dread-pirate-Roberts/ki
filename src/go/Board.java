@@ -515,6 +515,10 @@ public class Board extends JPanel implements java.io.Serializable {
 		if (this.turn == piece.white && this.is_black(x, y)) {
 			return true;
 		}
+		
+		if(this.turn == piece.black && this.is_white(x, y)) {
+			return true;
+		}
 
 		return false;
 	}
