@@ -81,7 +81,7 @@ public class Game extends JPanel{
 			this.game.computer_play();
 		}
 		
-		this.update_stone_info();
+		updateStoneInfo();
 	}
 	
 	protected void initGameInfo() {
@@ -124,7 +124,7 @@ public class Game extends JPanel{
 			e.printStackTrace();
 		}
 		
-		this.update_stone_info();
+		updateStoneInfo();
 	}
 	
 	protected void render() {
@@ -220,7 +220,7 @@ public class Game extends JPanel{
 						e.printStackTrace();
 					}
 					setSize();
-					update_stone_info();
+					updateStoneInfo();
 					game.repaint();
 					initGameInfo();
 				}
@@ -296,10 +296,10 @@ public class Game extends JPanel{
 		public void mousePressed(MouseEvent event) {
 			
 			boolean success = game.get_coordinates(event.getX(), event.getY() - 35);
-			update_stone_info();
+			updateStoneInfo();
 			if(success && game.comp != Computer.none) {
 				game.computer_play();
-				update_stone_info();
+				updateStoneInfo();
 			}
 			
 		} 
@@ -480,24 +480,11 @@ public class Game extends JPanel{
 		black, white, none
 	}
 	
-	public void update_stone_info() {
-		this.setTxtBlackStoneCount();
-		this.setTxtWhiteStoneCount();
-		this.setTxtBlackPrisonerCount();
-		this.setTxtWhitePrisonerCount();
-	}
-	
-	public void setTxtBlackStoneCount() {
-		this.txtBlackStoneCount.setText(new String(Integer.toString(this.game.black_stones)));
-	}
-	public void setTxtWhiteStoneCount() {
-		this.txtWhiteStoneCount.setText(new String(Integer.toString(this.game.white_stones)));
-	}
-	public void setTxtBlackPrisonerCount() {
-		this.txtBlackPrisonerCount.setText(new String(Integer.toString(this.game.black_prisoners)));
-	}
-	public void setTxtWhitePrisonerCount() {
-		this.txtWhitePrisonerCount.setText(new String(Integer.toString(this.game.white_prisoners)));
+	public void updateStoneInfo() {
+		txtBlackStoneCount.setText(Integer.toString(this.game.black_stones));
+		txtWhiteStoneCount.setText(Integer.toString(this.game.white_stones));
+		txtBlackPrisonerCount.setText(Integer.toString(this.game.black_prisoners));
+		txtWhitePrisonerCount.setText(Integer.toString(this.game.white_prisoners));
 	}
 }
 
