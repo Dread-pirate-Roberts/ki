@@ -392,7 +392,7 @@ public class Board extends JPanel implements java.io.Serializable {
 				temp.next_move();
 			}
 			*/
-			if(temp.equals(this.previous))//temp.repeat(this)) {
+			if(temp.equals(this.previous)){ //temp.repeat(this)) 
 				this.error = "You cannot repeat a previous board position!";
 				System.out.print(this.error);
 			} else if(success) {
@@ -611,6 +611,7 @@ public class Board extends JPanel implements java.io.Serializable {
 			for(int j = 0; j < this.size; j++) {
 				if (rhs.get_piece(i, j) != this.get_piece(i, j)){
 					return false;
+				}
 			}
 		}
 		
@@ -647,51 +648,57 @@ public class Board extends JPanel implements java.io.Serializable {
 		
 		if(this.size == 9){
 			diff = 2;
-		} else 
+		} else {
 			diff = 3;
 		}
 
-	if(i>0)
-
-	{
-		this.turn = piece.white;
-	}if(i>0)
-	{
-		this.setBlack(this.size - diff - 1, diff);
-		i--;
-	}if(i>0)
-	{
-		this.setBlack(diff, this.size - 1 - diff);
-		i--;
-	}if(i>0)
-	{
-		this.setBlack(diff, diff);
-		i--;
-	}if(i>0)
-	{
-		this.setBlack(this.size - diff - 1, this.size - diff - 1);
-		i--;
-	}if(i>0)
-	{
-		this.setBlack(half, half);
-		i--;
-	}if(i>0)
-	{
-		this.setBlack(half, diff);
-		i--;
-	}if(i>0)
-	{
-		this.setBlack(diff, half);
-		i--;
-	}if(i>0)
-	{
-		this.setBlack(half, this.size - diff - 1);
-		i--;
-	}if(i>0)
-	{
-		this.setBlack(this.size - diff - 1, half);
-		i--;
-	}
+		if(i>0){
+			this.turn = piece.white;
+		}
+		
+		if(i>0) {
+			this.setBlack(this.size - diff - 1, diff);
+			i--;
+		}
+		
+		if(i>0) {
+			this.setBlack(diff, this.size - 1 - diff);
+			i--;
+		}
+		
+		if(i>0) {
+			this.setBlack(diff, diff);
+			i--;
+		}
+		
+		if(i>0) {
+			this.setBlack(this.size - diff - 1, this.size - diff - 1);
+			i--;
+		}
+		
+		if(i>0) {
+			this.setBlack(half, half);
+			i--;
+		}
+		
+		if(i>0) {
+			this.setBlack(half, diff);
+			i--;
+		}
+		
+		if(i>0) {
+			this.setBlack(diff, half);
+			i--;
+		}
+		
+		if(i>0) {
+			this.setBlack(half, this.size - diff - 1);
+			i--;
+		}
+		if(i>0) {
+			this.setBlack(this.size - diff - 1, half);
+			i--;
+		}
 	}
 
 	private void setWhite(int x, int y) {

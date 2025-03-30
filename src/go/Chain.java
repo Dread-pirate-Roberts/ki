@@ -3,7 +3,7 @@
  *@date:Oct 18, 2012
  */
 
-
+package go;
 
 import go.Intersection.piece;
 

@@ -3,6 +3,7 @@
  *@date:Oct 23, 2012
  */
 
+package go;
 
 import java.io.Serializable;
 

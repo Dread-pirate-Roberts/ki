@@ -3,6 +3,7 @@
  *@date:Feb 21, 2013
  */
 
+package go;
 
 import java.security.SecureRandom;
 import java.util.ArrayList;

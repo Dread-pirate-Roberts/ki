@@ -3,6 +3,8 @@
  *@date:Feb 6, 2013
  */
 
+package go;
+
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 

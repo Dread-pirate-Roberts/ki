@@ -3,17 +3,12 @@
  *@date:Feb 20, 2013
  */
 
+package go;
 
 import java.io.Serializable;
 
-
-
-/**
- */
 public class Intersection implements Serializable
 {
-	
-	
 
 	/**
 	 * 

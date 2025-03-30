@@ -3,6 +3,7 @@
  *@date:Jan 23, 2013
  */
 
+package go;
 
 import javax.swing.JDialog;
 import java.awt.Panel;

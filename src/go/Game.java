@@ -51,8 +51,6 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeEvent;
 import javax.swing.SwingConstants;
 
-
-
 public class Game extends JPanel{
 
 	private Board game;

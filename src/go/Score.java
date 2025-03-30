@@ -3,6 +3,7 @@
  *@date:Feb 6, 2013
  */
 
+package go;
 
 import java.util.ArrayList;
 
