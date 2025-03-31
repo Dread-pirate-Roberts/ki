@@ -776,10 +776,10 @@ public class Board extends JPanel implements java.io.Serializable {
 
 	protected void computer_tree_search() {
 		GameTree g = new GameTree(this, this.turn);
-		g.build_tree(5);
-		g.set_score();
+		g.buildTree(5);
+		g.setScore();
 
-		Location L = new Location(g.get_next_move());
+		Location L = new Location(g.getNextMove());
 
 		boolean success;
 
