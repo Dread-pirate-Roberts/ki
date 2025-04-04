@@ -16,6 +16,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
@@ -133,7 +134,7 @@ public class Game extends JPanel{
 		txtBlackStoneCount.setColumns(10);
 		mouse = new Mouse();
 		frame = new JFrame("Ki");
-		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("icon.png"));
+        frame.setIconImage(Toolkit.getDefaultToolkit().getImage("src/icon.png"));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		setSize();
