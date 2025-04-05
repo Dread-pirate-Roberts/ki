@@ -494,7 +494,7 @@ public class Board extends JPanel implements java.io.Serializable {
 
 	private void clear_chain(Chain c) {
 
-		for (Location l : c.list) {
+		for (Location l : c.locationList) {
 			this.set_free(l.x, l.y);
 
 			if (this.turn == piece.white) {
@@ -735,8 +735,8 @@ public class Board extends JPanel implements java.io.Serializable {
 	 */
 
 	protected void add(Chain c, piece p) {
-		for( int i = 0; i < c.list.size(); i++) {
-			this.source[c.list.get(i).x][c.list.get(i).y] = new Intersection(p);
+		for( int i = 0; i < c.locationList.size(); i++) {
+			this.source[c.locationList.get(i).x][c.locationList.get(i).y] = new Intersection(p);
 		}
 	}
 

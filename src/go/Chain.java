@@ -12,35 +12,29 @@ import java.util.ArrayList;
 public class Chain implements Serializable{
 	
 	private static final long serialVersionUID = -7867335357759649093L;
-	protected ArrayList<Location> list;
+	protected ArrayList<Location> locationList;
 	
 	public Chain() {
-		this.list = new ArrayList<Location>();	
+		locationList = new ArrayList<Location>();
 	}
 	
-	public Chain(Chain c) {
-		this.list = new ArrayList<Location>(c.list);
+	public Chain(Chain chain) {
+		locationList = new ArrayList<Location>(chain.locationList);
 	}
 	
-	public void add(Location l) {
-		this.list.add(l);
+	public void add(Location location) {
+		locationList.add(location);
 	}
 	
 	public void add(int x, int y) {
-		this.list.add(new Location(x,y));
+		locationList.add(new Location(x,y));
 	}
 	
 	public boolean contains(int x, int y) {
-		return this.contains(new Location(x,y));
+		return contains(new Location(x,y));
 	}
 	
 	public boolean contains(Location arg) {
-		for(Location l: this.list) {
-			if(l.equals(arg)) {
-				return true;
-			}
-		}
-		
-		return false;
+		return locationList.contains(arg);
 	}
 }
