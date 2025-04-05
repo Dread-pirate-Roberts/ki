@@ -43,15 +43,15 @@ public class Score {
 	}
 
 	public boolean is_visited(int i, int j) {
-		return this.board.source[i][j].get_visited();
+		return this.board.source[i][j].visited;
 	}
 
 	public void set_visited(int i, int j) {
-		this.board.source[i][j].visited();
+		this.board.source[i][j].visited = true;
 	}
 
 	public void set_unvisited(int i, int j) {
-		this.board.source[i][j].unvisited();
+		this.board.source[i][j].visited = false;
 	}
 
 	public boolean in_range(int i, int j) {
@@ -65,7 +65,7 @@ public class Score {
 	public void board_unvisted() {
 		for (Intersection j[] : this.board.source) {
 			for (Intersection i : j) {
-				i.unvisited();
+				i.visited = false;
 			}
 		}
 	}
@@ -142,19 +142,19 @@ public class Score {
 	}
 
 	protected void update_white_influence_dist(int i, int j, int influence) {
-		this.board.source[i][j].update_white_influence(influence);
+		this.board.source[i][j].updateWhiteInfluence(influence);
 	}
 
 	protected void update_black_influence_dist(int i, int j, int influence) {
-		this.board.source[i][j].update_black_influence(influence);
+		this.board.source[i][j].updateBlackInfluence(influence);
 	}
 
 	protected void increase_black_influence(int i, int j) {
-		this.board.source[i][j].inc_black_influence();
+		this.board.source[i][j].blackInfluence++;
 	}
 
 	protected void increase_white_influence(int i, int j) {
-		this.board.source[i][j].inc_white_influence();
+		this.board.source[i][j].whiteInfluence++;
 	}
 
 	protected double get_white_influence() {
@@ -169,9 +169,9 @@ public class Score {
 					 * if(j.white_more_influence()) ret++;
 					 */
 
-					if (j.white_influence > j.black_influence) {
+					if (j.whiteInfluence > j.blackInfluence) {
 						ret++;
-					} else if (j.white_influence == j.black_influence) {
+					} else if (j.whiteInfluence == j.blackInfluence) {
 						ret += 0.5;
 					}
 				}
@@ -192,9 +192,9 @@ public class Score {
 					 * if(j.black_more_influence()) ret++;
 					 */
 
-					if (j.black_influence > j.white_influence) {
+					if (j.blackInfluence > j.whiteInfluence) {
 						ret++;
-					} else if (j.black_influence == j.white_influence) {
+					} else if (j.blackInfluence == j.whiteInfluence) {
 						ret += 0.5;
 					}
 				}
@@ -224,8 +224,8 @@ public class Score {
 	protected void clear_influence() {
 		for (Intersection i[] : this.board.source) {
 			for (Intersection j : i) {
-				j.black_influence = 0;
-				j.white_influence = 0;
+				j.blackInfluence = 0;
+				j.whiteInfluence = 0;
 			}
 		}
 	}

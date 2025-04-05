@@ -107,7 +107,7 @@ public class Board extends JPanel implements java.io.Serializable {
 
 	public boolean is_white(int i, int j) {
 		if (this.inRange(i, j)) {
-			return this.source[i][j].is_white();
+			return this.source[i][j].team == piece.white;
 		}
 
 		return false;
@@ -115,7 +115,7 @@ public class Board extends JPanel implements java.io.Serializable {
 
 	public boolean is_free(int i, int j) {
 		if (this.inRange(i, j)) {
-			return this.source[i][j].is_free();
+			return this.source[i][j].team == piece.free;
 		}
 
 		return false;
@@ -123,7 +123,7 @@ public class Board extends JPanel implements java.io.Serializable {
 
 	public boolean is_black(int i, int j) {
 		if (this.inRange(i, j)) {
-			return this.source[i][j].is_black();
+			return this.source[i][j].team == piece.black;
 		}
 
 		return false;
@@ -252,7 +252,7 @@ public class Board extends JPanel implements java.io.Serializable {
 	public void drawPieces(Graphics2D arg) {
 		for (int i = 0; i < this.size; i++) {
 			for (int j = 0; j < this.size; j++) {
-				if (!this.source[i][j].is_free())
+				if (!(this.source[i][j].team == piece.free))
 					this.drawpiece(i, j, this.source[i][j].team, arg);
 			}
 		}
