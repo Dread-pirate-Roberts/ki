@@ -742,16 +742,16 @@ public class Board extends JPanel implements java.io.Serializable {
 
 	protected double get_territory_score() {
 		Score s = new Score(this);
-		s.set_influence();
+		s.setInfluence();
 		
-		return s.get_white_territory() - (double) s.get_black_territory();
+		return s.getWhiteTerritory() - (double) s.getBlackTerritory();
 	}
 
 	protected double get_area_score() {
 		Score s = new Score(this);
-		s.set_influence();
+		s.setInfluence();
 
-		return s.get_white_area() - (double) s.get_black_area();
+		return s.getWhiteArea() - (double) s.getBlackArea();
 	}
 
 	protected void computer_play() {

@@ -14,47 +14,20 @@ public class Score {
 
 	protected Board board;
 
-	public Score() {
-	}
-
 	public Score(Board rhs) {
-		this.board = new Board(rhs);
-		this.set_influence();
+		board = rhs;
+		setInfluence();
 	}
 
-	public piece get_team(int i, int j) {
-		return this.board.source[i][j].team;
+	public piece getTeam(int i, int j) {
+		return board.source[i][j].team;
 	}
 
-	public boolean is_white(int i, int j) {
-		return this.board.is_white(i, j);
+	public boolean isFree(int i, int j) {
+		return board.is_free(i, j);
 	}
 
-	public boolean is_black(int i, int j) {
-		return this.board.is_black(i, j);
-	}
-
-	public boolean is_free(int i, int j) {
-		return this.board.is_free(i, j);
-	}
-
-	public boolean is_edge(int i, int j) {
-		return this.board.is_edge(i, j);
-	}
-
-	public boolean is_visited(int i, int j) {
-		return this.board.source[i][j].visited;
-	}
-
-	public void set_visited(int i, int j) {
-		this.board.source[i][j].visited = true;
-	}
-
-	public void set_unvisited(int i, int j) {
-		this.board.source[i][j].visited = false;
-	}
-
-	public boolean in_range(int i, int j) {
+	public boolean isInRange(int i, int j) {
 		boolean ret = i >= 0;
 		ret &= i < this.board.size;
 		ret &= j >= 0;
@@ -62,7 +35,7 @@ public class Score {
 		return ret;
 	}
 
-	public void board_unvisted() {
+	public void setBoardUnvisted() {
 		for (Intersection j[] : this.board.source) {
 			for (Intersection i : j) {
 				i.visited = false;
@@ -70,108 +43,99 @@ public class Score {
 		}
 	}
 
-	protected void set_influence() {
-		this.clear_influence();
-		this.board_unvisted();
+	protected void setInfluence() {
+		clearInfluence();
+		setBoardUnvisted();
 
 		for (int i = 0; i < this.board.size; i++) {
 			for (int j = 0; j < this.board.size; j++) {
-				this.set_piece_influence(i, j);
-				this.board_unvisted();
+				set_piece_influence(i, j);
+				setBoardUnvisted();
 			}
 		}
 	}
 
 	protected void set_piece_influence(int i, int j) {
-		piece p = this.get_team(i, j);
+		piece p = getTeam(i, j);
 
 		if (p == piece.white) {
-			this.set_white_influence(i, j);
+			set_white_influence(i, j);
 		} else if (p == piece.black) {
-			this.set_black_influence(i, j);
+			set_black_influence(i, j);
 		}
 	}
 
 	protected void set_white_influence_floodfill(int i, int j, int influ, int depth) {
-
-		// this.update_white_influence_dist(i, j, influ);
 		this.increase_white_influence(i, j);
 
 		if (depth > 0) {
-			if (this.is_free(i - 1, j)) {
-				this.set_white_influence_floodfill(i - 1, j, influ + 1, depth - 1);
+			if (isFree(i - 1, j)) {
+				set_white_influence_floodfill(i - 1, j, influ + 1, depth - 1);
 			}
-			if (this.is_free(i, j - 1)) {
-				this.set_white_influence_floodfill(i, j - 1, influ + 1, depth - 1);
+			if (isFree(i, j - 1)) {
+				set_white_influence_floodfill(i, j - 1, influ + 1, depth - 1);
 			}
-			if (this.is_free(i + 1, j)) {
-				this.set_white_influence_floodfill(i + 1, j, influ + 1, depth - 1);
+			if (isFree(i + 1, j)) {
+				set_white_influence_floodfill(i + 1, j, influ + 1, depth - 1);
 			}
-			if (this.is_free(i, j + 1)) {
-				this.set_white_influence_floodfill(i, j + 1, influ + 1, depth - 1);
+			if (isFree(i, j + 1)) {
+				set_white_influence_floodfill(i, j + 1, influ + 1, depth - 1);
 			}
 		}
 	}
 
 	protected void set_black_influence_floodfill(int i, int j, int influ, int depth) {
-		// this.update_black_influence_dist(i, j, influ);
 		this.increase_black_influence(i, j);
 
 		if (depth > 0) {
-			if (this.is_free(i - 1, j)) {
-				this.set_black_influence_floodfill(i - 1, j, influ + 1, depth - 1);
+			if (isFree(i - 1, j)) {
+				set_black_influence_floodfill(i - 1, j, influ + 1, depth - 1);
 			}
-			if (this.is_free(i, j - 1)) {
-				this.set_black_influence_floodfill(i, j - 1, influ + 1, depth - 1);
+			if (isFree(i, j - 1)) {
+				set_black_influence_floodfill(i, j - 1, influ + 1, depth - 1);
 			}
-			if (this.is_free(i + 1, j)) {
-				this.set_black_influence_floodfill(i + 1, j, influ + 1, depth - 1);
+			if (isFree(i + 1, j)) {
+				set_black_influence_floodfill(i + 1, j, influ + 1, depth - 1);
 			}
-			if (this.is_free(i, j + 1)) {
-				this.set_black_influence_floodfill(i, j + 1, influ + 1, depth - 1);
+			if (isFree(i, j + 1)) {
+				set_black_influence_floodfill(i, j + 1, influ + 1, depth - 1);
 			}
 		}
 	}
 
 	protected void set_white_influence(int i, int j) {
-		this.set_white_influence_floodfill(i, j, 0, 5);
+		set_white_influence_floodfill(i, j, 0, 5);
 	}
 
 	protected void set_black_influence(int i, int j) {
-		this.set_black_influence_floodfill(i, j, 0, 5);
+		set_black_influence_floodfill(i, j, 0, 5);
 	}
 
 	protected void update_white_influence_dist(int i, int j, int influence) {
-		this.board.source[i][j].updateWhiteInfluence(influence);
+		board.source[i][j].updateWhiteInfluence(influence);
 	}
 
 	protected void update_black_influence_dist(int i, int j, int influence) {
-		this.board.source[i][j].updateBlackInfluence(influence);
+		board.source[i][j].updateBlackInfluence(influence);
 	}
 
 	protected void increase_black_influence(int i, int j) {
-		this.board.source[i][j].blackInfluence++;
+		board.source[i][j].blackInfluence++;
 	}
 
 	protected void increase_white_influence(int i, int j) {
-		this.board.source[i][j].whiteInfluence++;
+		board.source[i][j].whiteInfluence++;
 	}
 
-	protected double get_white_influence() {
+	protected double getWhiteInfluence() {
 		double ret = 0.0;
 
-		for (Intersection i[] : this.board.source) {
-			for (Intersection j : i) {
-				if (j.team == piece.free) {
-
-					/*
-					 * if( j.white_influence == j.black_influence) ret += 0.5; else
-					 * if(j.white_more_influence()) ret++;
-					 */
-
-					if (j.whiteInfluence > j.blackInfluence) {
+		for (Intersection row[] : board.source) {
+			for (Intersection intersection : row) {
+				if (intersection.team == piece.free) {
+					if (intersection.whiteInfluence > intersection.blackInfluence) {
 						ret++;
-					} else if (j.whiteInfluence == j.blackInfluence) {
+					} else if (intersection.whiteInfluence == intersection.blackInfluence) {
 						ret += 0.5;
 					}
 				}
@@ -180,21 +144,15 @@ public class Score {
 		return ret;
 	}
 
-	protected double get_black_influence() {
+	protected double getBlackInfluence() {
 		double ret = 0.0;
 
-		for (Intersection i[] : this.board.source) {
-			for (Intersection j : i) {
-				if (j.team == piece.free) {
-
-					/*
-					 * if( j.black_influence == j.white_influence) ret += 0.5; else
-					 * if(j.black_more_influence()) ret++;
-					 */
-
-					if (j.blackInfluence > j.whiteInfluence) {
+		for (Intersection row[] : board.source) {
+			for (Intersection intersection : row) {
+				if (intersection.team == piece.free) {
+					if (intersection.blackInfluence > intersection.whiteInfluence) {
 						ret++;
-					} else if (j.blackInfluence == j.whiteInfluence) {
+					} else if (intersection.blackInfluence == intersection.whiteInfluence) {
 						ret += 0.5;
 					}
 				}
@@ -203,26 +161,24 @@ public class Score {
 		return ret;
 	}
 
-	protected double get_black_territory() {
-		double ret = get_black_influence();
-		return ret - this.board.black_prisoners;
+	protected double getBlackTerritory() {
+		return getBlackInfluence() - board.black_prisoners;
 	}
 
-	protected double get_white_territory() {
-		double ret = get_white_influence();
-		return ret - this.board.white_prisoners;
+	protected double getWhiteTerritory() {
+		return getWhiteInfluence() - board.white_prisoners;
 	}
 
-	protected double get_white_area() {
-		return get_white_influence() + this.board.white_stones;
+	protected double getWhiteArea() {
+		return getWhiteInfluence() + board.white_stones;
 	}
 
-	protected double get_black_area() {
-		return get_black_influence() + this.board.black_stones;
+	protected double getBlackArea() {
+		return getBlackInfluence() + board.black_stones;
 	}
 
-	protected void clear_influence() {
-		for (Intersection i[] : this.board.source) {
+	protected void clearInfluence() {
+		for (Intersection i[] : board.source) {
 			for (Intersection j : i) {
 				j.blackInfluence = 0;
 				j.whiteInfluence = 0;
